@@ -16,7 +16,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-export default function ResponsiveAppBar() {
+export default function Navbar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -43,8 +43,8 @@ export default function ResponsiveAppBar() {
                     <Typography
                         variant="h6"
                         noWrap
-                        component="a"
-                        href="/"
+                        component="Link"
+                        to=""
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -54,8 +54,7 @@ export default function ResponsiveAppBar() {
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
-                    >
-                        LOGO
+                        SHOP
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
