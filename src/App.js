@@ -3,8 +3,8 @@ import SignIn from "./pages/Login";
 import Register from "./pages/Register";
 import {Route, Routes} from "react-router-dom";
 import Home from "./pages/home/Home";
-import ListProducts from "./pages/home/products/ListProducts";
-import AddProducts from "./pages/home/products/AddProduct";
+import ListProduct from "./pages/products/ListProduct";
+import AddProduct from "./pages/products/AddProduct";
 
 function App() {
     return (
@@ -13,8 +13,8 @@ function App() {
                 <Route path={'/'} element={<SignIn/>}/>
                 <Route path={'/register'} element={<Register/>}/>
                 <Route path={'/home'} element={<Home/>}>
-                    <Route path={''} element={<ListProducts/>}></Route>
-                    <Route path={'add-product'} element={<AddProducts/>}></Route>
+                    <Route path={''} element={<ListProduct/>}></Route>
+                    <Route path={'add-product'} element={<AddProduct/>}></Route>
                 </Route>
             </Routes>
         </>
