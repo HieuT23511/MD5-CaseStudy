@@ -1,15 +1,15 @@
-import Navbar from "../../components/Navbar";
-import {Outlet} from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Header from "../../components/Header";
 
 export default function Home() {
     return (
         <>
             <div>
-                <Navbar></Navbar>
+                <Header></Header>
             </div>
-            <div>
+            <div className="mt-[112px]">
                 <Outlet></Outlet>
             </div>
         </>
-    )
+    );
 }

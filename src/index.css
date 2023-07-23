@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -25,7 +26,6 @@
     opacity: 1;
   }
 }
-
 .swirl-in-fwd {
   animation: swirl-in-fwd 0.3s ease-out both;
 }
@@ -40,7 +40,6 @@
     opacity: 0;
   }
 }
-
 .swirl-out-bck {
   animation: swirl-out-bck 0.3s ease-in both;
 }
