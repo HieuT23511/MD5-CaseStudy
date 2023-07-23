@@ -7,7 +7,7 @@ export default function Home() {
             <div>
                 <Navbar></Navbar>
             </div>
-            <div className="bg-sky-100">
+            <div>
                 <Outlet></Outlet>
             </div>
         </>
