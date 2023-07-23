@@ -7,7 +7,7 @@ export default function Home() {
             <div>
                 <Header></Header>
             </div>
-            <div>
+            <div className="bg-sky-100">
                 <Outlet></Outlet>
             </div>
         </>
