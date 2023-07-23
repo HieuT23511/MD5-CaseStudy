@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-// import { useDispatch } from "react-redux"
-// import { addToCart } from '../redux/bazaarSlice';
+import { useDispatch } from "react-redux"
+
 import { ToastContainer, toast, cssTransition } from 'react-toastify';
+import { addToCart } from "../../redux/generalSlice";
 
 const bounce = cssTransition({
     enter: "animate__animated animate__bounceIn",
@@ -13,9 +14,17 @@ const swirl = cssTransition({
 });
 
 export function ProductCard({product}) {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const { _id, name, oldPrice, price, image, category, isNew, description } = product;
     const handleAddToCart = (name) => {
+        dispatch(addToCart({
+            _id: _id, 
+            name: name,
+            image: image,
+            price: price,
+            quantity: 1,
+            description: description
+        }))
         toast.success(`${name} is added`, {transition: swirl})
     }
     return (
@@ -35,7 +44,7 @@ export function ProductCard({product}) {
                     <p className="text-black py-1">{category}</p>
                     <div className="pb-6">
                         <span className="text-xl font-bold text-black mr-1">{price.toLocaleString()}VNĐ</span>
-                        <span className="text-sm text-black line-through ml-1">{oldPrice.toLocaleString()}VNĐ</span>
+                        <span className="text-sm text-gray-500 line-through ml-1">{oldPrice.toLocaleString()}VNĐ</span>
                 </div>
                 <button onClick={() => handleAddToCart(name)} className="w-full hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300">
                     <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
