@@ -1,7 +1,10 @@
+
+import { Products } from "../../components/products/Products";
+
 export default function ListProduct(){
     return(
         <>
-            <h2>List Product</h2>
+            <Products/>
         </>
     )
 }
