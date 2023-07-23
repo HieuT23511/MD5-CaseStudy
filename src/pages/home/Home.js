@@ -7,7 +7,7 @@ export default function Home() {
             <div>
                 <Header></Header>
             </div>
-            <div className="bg-sky-100">
+            <div className="mt-[112px]">
                 <Outlet></Outlet>
             </div>
         </>
