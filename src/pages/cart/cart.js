@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {toast} from "react-toastify";
+import {CartItem} from "../../components/CartItem";
+import {Beach} from "../../assests";
 
 export const Cart = () => {
-    const productData = useSelector((state) => state.general.productData)
+    const productData = useSelector((state) => state.cart.productData)
     const [totalAmount, setTotalAmount] = useState('')
-    const UserInfo = useSelector((state) => state.general.userInfo)
+    const UserInfo = useSelector((state) => state.cart.userInfo)
     const [payNow, setPayNow] = useState(false)
     useEffect(() => {
         let price = 0;
@@ -25,7 +27,7 @@ export const Cart = () => {
 
     return (
         <div>
-            <img className='w-full h-60 object-cover' src={"/img/pexels 4345.jpg"} alt="cartImg"/>
+            <img className='w-full h-60 object-cover' src={Beach} alt="cartImg"/>
             <div className='max-w-screen-xl mx-auto py-20 flex'>
                 <CartItem/>
                 <div className='w-1/3 bg-[#fafafa] py-6 px-4'>
