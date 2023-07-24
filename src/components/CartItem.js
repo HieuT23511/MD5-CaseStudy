@@ -11,7 +11,6 @@ export const CartItem = () => {
             <div className="w-full ">
                 <h2 className="font-titleFont text-2xl">Shopping cart</h2>
             </div>
-
             {productData.map((item, key) => (
                 <div key={item._id} className="flex items-center justify-between gap-6 mt-6">
                     <div className="flex items-center gap-2">
@@ -49,7 +48,7 @@ export const CartItem = () => {
                     </div>
                     <p className="w-10">${item.price*item.quantity}</p>
                 </div>
-            ))};
+            ))}
 
             <button onClick={() => dispatch(resetCart())} className='text-xl font-bold  bg-red-500 text-white py-1 ml-6 px-6 mt-8'>Reset Cart</button>
         </div>
