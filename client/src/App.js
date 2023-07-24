@@ -9,6 +9,7 @@ import About from "./pages/home/About";
 import Contact from "./pages/home/Contact";
 import ListProduct from './pages/products/ListProduct';
 import {CartItem} from "./components/CartItem";
+import {Cart} from "./pages/cart/cart";
 
 function App() {
     return (
@@ -22,7 +23,7 @@ function App() {
                     <Route path={'/add-product'} element={<AddProduct />}></Route>
                     <Route path={'/about'} element={<About />}></Route>
                     <Route path={'/contact'} element={<Contact />}></Route>
-                    <Route path={'/cart'} element={<CartItem />}></Route>
+                    <Route path={'/cart'} element={<Cart />}></Route>
                 </Route>
             </Routes>
         </>

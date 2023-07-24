@@ -1,6 +1,6 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from "react-redux";
-import { deleteFromCart, resetCart, incrementQuantity, decrementQantity } from "../redux/generalSlice";
+import { deleteFromCart, resetCart, incrementQuantity, decrementQuantity } from "../redux/generalSlice";
 
 export const CartItem = () => {
     const productData = useSelector(state => state.cart.productData);
@@ -22,7 +22,7 @@ export const CartItem = () => {
                         <p className='text-base text-black'>Quantity</p>
                         <div className='flex items-center gap-4 text-sm font-semibold'>
                             <button
-                                onClick={() => dispatch(decrementQantity({
+                                onClick={() => dispatch(decrementQuantity({
                                     _id: item._id,
                                     title: item.title,
                                     image: item.image,
@@ -49,8 +49,9 @@ export const CartItem = () => {
                     <p className="w-10">${item.price*item.quantity}</p>
                 </div>
             ))}
-
+            {productData.length !== 0 &&
             <button onClick={() => dispatch(resetCart())} className='text-xl font-bold  bg-red-500 text-white py-1 ml-6 px-6 mt-8'>Reset Cart</button>
+            }
         </div>
     )
 }
