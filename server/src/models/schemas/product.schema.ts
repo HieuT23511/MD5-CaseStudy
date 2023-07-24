@@ -5,7 +5,7 @@ export interface IProduct extends Document {
     oldPrice: number;
     price: number;
     image: string;
-    category: any;
+    productType: object;
     isNew: any;
     description: string;
     
@@ -16,7 +16,7 @@ const productSchema: Schema = new  Schema<IProduct>({
     oldPrice: Number,
     price: Number,
     image: String,
-    category: { type: Schema.Types.ObjectId, ref: "ProductType" },
+    productType: {type: Schema.Types.ObjectId, ref: "ProductType"},
     isNew: {type: Boolean, default: true},
     description: String
 });

@@ -1,10 +1,14 @@
-import Product from "../models/schemas/product.schema";
-
-export class productController {
-
-    static async getProductList(req: any, res: any) {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.productController = void 0;
+const product_schema_1 = __importDefault(require("../models/schemas/product.schema"));
+class productController {
+    static async getProductList(req, res) {
         try {
-            const productList = await Product.find().populate({
+            const productList = await product_schema_1.default.find().populate({
                 path: 'category'
             });
             if (productList) {
@@ -13,36 +17,36 @@ export class productController {
                     productList: productList
                 });
             }
-        } catch (err) {
+        }
+        catch (err) {
             res.status(500).json({
                 message: err.message
             });
         }
     }
-
-    static async getProductDetail(req: any, res: any) {
+    static async getProductDetail(req, res) {
         try {
             let id = req.params.id;
-            let product = await Product.findOne({ _id: id });
+            let product = await product_schema_1.default.findOne({ _id: id });
             if (product) {
                 res.status(200).json({
                     message: "Success",
                     product: product
                 });
             }
-        } catch (err) {
+        }
+        catch (err) {
             res.status(500).json({
                 message: err.message
             });
         }
     }
-
-    static async addProduct(req: any, res: any) {
+    static async addProduct(req, res) {
         try {
             const { name, oldPrice, price, image, productType, description, isNew } = req.body;
-            let product = await Product.findOne({ name: name });
+            let product = await product_schema_1.default.findOne({ name: name });
             if (!product) {
-                let newProduct = new Product({
+                let newProduct = new product_schema_1.default({
                     name: name,
                     oldPrice: oldPrice,
                     price: price,
@@ -58,43 +62,45 @@ export class productController {
                         newProduct: result
                     });
                 }
-            } else {
+            }
+            else {
                 res.status(500).json({
                     message: "Product already exist"
                 });
             }
-        } catch (err) {
+        }
+        catch (err) {
             res.status(500).json({
                 message: err.message
             });
         }
     }
-
-    static async deleteProduct(req: any, res: any) {
+    static async deleteProduct(req, res) {
         try {
             let id = req.params.id;
-            let productDelete = await Product.findOne({ _id: id });
+            let productDelete = await product_schema_1.default.findOne({ _id: id });
             if (productDelete) {
                 await productDelete.deleteOne();
                 res.status(200).json({
                     message: "Delete product success!"
                 });
-            } else {
+            }
+            else {
                 res.status(500).json({
                     message: "Product does not exist"
                 });
             }
-        } catch (err) {
+        }
+        catch (err) {
             res.status(500).json({
                 message: err.message
             });
         }
     }
-
-    static async updateProduct(req: any, res: any) {
+    static async updateProduct(req, res) {
         try {
             let id = req.params.id;
-            let productUpdate = await Product.findOne({ _id: id });
+            let productUpdate = await product_schema_1.default.findOne({ _id: id });
             if (productUpdate) {
                 const { name, oldPrice, price, image, productType, description, isNew } = req.body;
                 productUpdate.name = name;
@@ -111,16 +117,19 @@ export class productController {
                         productUpdated: result
                     });
                 }
-            } else {
+            }
+            else {
                 res.status(500).json({
                     message: "Product does not exist"
                 });
             }
-        } catch (err) {
+        }
+        catch (err) {
             res.status(500).json({
                 message: err.message
             });
         }
     }
-
 }
+exports.productController = productController;
+//# sourceMappingURL=product.controller.js.map
