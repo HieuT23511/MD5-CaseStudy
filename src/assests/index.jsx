@@ -1,2 +1,2 @@
-import FE2DIE from "./FE2DIE.png"
+import FE2DIE from "./fe2die.jpg"
 export { FE2DIE }
