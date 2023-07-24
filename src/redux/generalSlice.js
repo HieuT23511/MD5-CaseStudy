@@ -29,7 +29,7 @@ export const generalSlice = createSlice({
         item.quantity++;
       }
     },
-    decrementQantity: (state, action) => {
+    decrementQuantity: (state, action) => {
       const item = state.productData.find((item) => item._id === action.payload._id)
       if (item.quantity === 1) {
         item.quantity = 1
@@ -46,5 +46,5 @@ export const generalSlice = createSlice({
   }
 })
 
-export const { addToCart, deleteFromCart, resetCart, incrementQuantity, decrementQantity, addUser, removeUser } = generalSlice.actions;
+export const { addToCart, deleteFromCart, resetCart, incrementQuantity, decrementQuantity, addUser, removeUser } = generalSlice.actions;
 export default generalSlice.reducer;
