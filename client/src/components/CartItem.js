@@ -11,7 +11,6 @@ export const CartItem = () => {
             <div className="w-full ">
                 <h2 className="font-titleFont text-2xl">Shopping cart</h2>
             </div>
-
             {productData.map((item, key) => (
                 <div key={item._id} className="flex items-center justify-between gap-6 mt-6">
                     <div className="flex items-center gap-2">
