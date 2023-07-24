@@ -30,12 +30,17 @@ export const generalSlice = createSlice({
       }
     },
     decrementQantity: (state, action) => {
+      // let productList = state.productData;
       const item = state.productData.find((item) => item._id === action.payload._id)
       if (item.quantity === 1) {
         item.quantity = 1
       } else {
         item.quantity--;
       }
+      // let index = productList.findIndex(item => item._id === action.payload._id);
+      // productList[index] = item;
+      // state.productData = productList;
+
     },
     addUser: (state, action) => {
       state.userInfo = action.payload
