@@ -6,7 +6,7 @@ export default function Header() {
         <>
             <div className="z-50 w-full h-30 bg-white border-b-[1px] z-index-1 fixed top-0 border-b-gray-800 font-titleFont ">
                 <div className='max-w-screen-xl flex items-center justify-between'>
-                    <Link to='/home'>
+                    <Link to='/'>
                         <div>
                             <img src={FE2DIE} alt="Logo" className='w-28 ml-[35px]' />
                         </div>
