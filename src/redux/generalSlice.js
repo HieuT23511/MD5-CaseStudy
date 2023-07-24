@@ -36,6 +36,10 @@ export const generalSlice = createSlice({
       } else {
         item.quantity--;
       }
+      // let index = productList.findIndex(item => item._id === action.payload._id);
+      // productList[index] = item;
+      // state.productData = productList;
+
     },
     addUser: (state, action) => {
       state.userInfo = action.payload

@@ -35,7 +35,7 @@ export function ProductCard({product}) {
                     {isNew && <span className="absolute top-0 right-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">39% OFF</span>}
                 </a>
             </Link>
-            <div className="mt-4 px-5 pb-5 text-center">
+            <div className="mt-4 px-5 pb-5 text-center">    
                 <Link to={`/products/${_id}`}>
                     <a>
                         <h5 className="text-2xl font-bold text-center tracking-tight hover:text-blue-600 duration-75 text-black">{name}</h5>
