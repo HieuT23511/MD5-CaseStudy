@@ -23,12 +23,13 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 import { Document } from "mongoose";
+import { IProductType } from "./productType.schema";
 export interface IProduct extends Document {
     name: string;
     oldPrice: number;
     price: number;
     image: string;
-    productType: object;
+    productType: IProductType;
     isNew: any;
     description: string;
 }

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { productDemo } from '../../components/products/Products';
 import { ToastContainer, toast, cssTransition } from 'react-toastify';
 import { addToCart } from '../../redux/generalSlice';
+import axios from 'axios';
 
 const bounce = cssTransition({
     enter: "animate__animated animate__bounceIn",
@@ -22,11 +23,12 @@ export function ProductDetail() {
     let [baseQty, setBaseQty] = useState(1);
 
     useEffect(() => {
-        let product = productDemo.find(item => item._id == id);
-        if (product) {
-            setDetails({ ...product });
-        } else {
-        }
+        axios.get(`http://localhost:8000/api/product/detail/${id}`).then((res) => {
+            const product = res.data.product;
+            if (product) {
+                setDetails({...product})
+            }
+        })
     }, [])
 
     const handleSetQuantity = (type) => {

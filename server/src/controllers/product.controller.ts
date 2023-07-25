@@ -1,12 +1,12 @@
+import ProductType from "../models/schemas/productType.schema";
 import Product from "../models/schemas/product.schema";
 
 export class productController {
 
     static async getProductList(req: any, res: any) {
         try {
-            const productList = await Product.find().populate({
-                path: 'category'
-            });
+            const productsType =  await ProductType.find();
+            const productList = await Product.find().populate('productType');
             if (productList) {
                 res.status(200).json({
                     message: "Success!",
