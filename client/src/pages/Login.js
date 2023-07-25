@@ -10,40 +10,45 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link } from "react-router-dom";
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {Link} from "react-router-dom";
+import * as Yup from 'yup';
+import {useFormik} from "formik";
 
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
-                Your Website
-            </Link>{' '}
+            {'FE2DIE-'}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
     );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
+const LoginSchema = Yup.object().shape({
+    password: Yup.string()
+        .required('Required'),
+    email: Yup.string().email('Invalid email').required('Required'),
+});
 
 export default function SignIn() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
+    const formLogin = useFormik({
+        initialValues: {
+            email: "",
+            password: "",
+        },
+        validationSchema: LoginSchema,
+        onSubmit: values => {
+            console.log(values)
+        },
+    })
 
     return (
         <ThemeProvider theme={defaultTheme}>
             <Container component="main" maxWidth="xs">
-                <CssBaseline />
+                <CssBaseline/>
                 <Box
                     sx={{
                         marginTop: 8,
@@ -52,13 +57,13 @@ export default function SignIn() {
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
+                    <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+                        <LockOutlinedIcon/>
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <Box component="form" onSubmit={formLogin.handleSubmit} noValidate sx={{mt: 1}}>
                         <TextField
                             margin="normal"
                             required
@@ -68,6 +73,10 @@ export default function SignIn() {
                             name="email"
                             autoComplete="email"
                             autoFocus
+                            onChange={formLogin.handleChange}
+                            value={formLogin.values.email}
+                            error={formLogin.errors.email && formLogin.touched.email}
+                            helperText={formLogin.errors.email && formLogin.touched.email ? formLogin.errors.email : null}
                         />
                         <TextField
                             margin="normal"
@@ -78,16 +87,16 @@ export default function SignIn() {
                             type="password"
                             id="password"
                             autoComplete="current-password"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
+                            onChange={formLogin.handleChange}
+                            value={formLogin.values.password}
+                            error={formLogin.errors.password && formLogin.touched.password}
+                            helperText={formLogin.errors.password && formLogin.touched.password ? formLogin.errors.password : null}
                         />
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{mt: 3, mb: 2}}
                         >
                             Sign In
                         </Button>
@@ -95,13 +104,13 @@ export default function SignIn() {
                             <Grid item xs>
                                 <div><Link to={"/register"}> {"Don't have an account? Sign Up"} </Link></div>
                             </Grid>
-                            <Grid item >
+                            <Grid item>
                                 <div><Link to={"/"}> {"Back to Home"} </Link></div>
                             </Grid>
                         </Grid>
                     </Box>
                 </Box>
-                <Copyright sx={{ mt: 8, mb: 4 }} />
+                <Copyright sx={{mt: 8, mb: 4}}/>
             </Container>
         </ThemeProvider>
     );

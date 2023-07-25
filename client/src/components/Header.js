@@ -26,7 +26,6 @@ export default function Header() {
                                     className="object-cover btn- h-9 w-9 rounded-full mr-2 bg-gray-300" alt="" />
                                 <Dropdown />
                             </div>
-                            <Link to={'/register'}><li className=' text-black font-bold hover:text-blue-500 hover:underline'>Register</li></Link>
                         </ul>
                     </div>
                 </div>

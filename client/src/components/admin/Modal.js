@@ -60,7 +60,6 @@ const Modal = ({ isOpen, onClose, submitForm, select }) => {
                 </div>
             </div>
         </>
-
     );
 };
 

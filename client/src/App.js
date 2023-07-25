@@ -6,9 +6,7 @@ import Home from "./pages/home/Home";
 import AddProduct from "./pages/products/AddProduct";
 import { ProductDetail } from './pages/products/ProductDetail';
 import About from "./pages/home/About";
-import Contact from "./pages/home/Contact";
 import ListProduct from './pages/products/ListProduct';
-import { CartItem } from "./components/CartItem";
 import {Cart} from "./pages/cart/cart";
 import AdminHome from './pages/admin/AdminHome';
 import Table from './components/admin/Table';
@@ -25,7 +23,6 @@ function App() {
                     <Route path={'/products/:id'} element={<ProductDetail />}></Route>
                     <Route path={'/add-product'} element={<AddProduct />}></Route>
                     <Route path={'/about'} element={<About />}></Route>
-                    <Route path={'/contact'} element={<Contact />}></Route>
                     <Route path={'/cart'} element={<Cart />}></Route>
                 </Route>
                 <Route path='/admin' element={<AdminHome />}>
