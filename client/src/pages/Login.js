@@ -11,9 +11,11 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import * as Yup from 'yup';
 import {useFormik} from "formik";
+import {useState} from "react";
+import {Alert} from "@mui/material";
 
 function Copyright(props) {
     return (
@@ -32,17 +34,45 @@ const LoginSchema = Yup.object().shape({
         .required('Required'),
     email: Yup.string().email('Invalid email').required('Required'),
 });
+let listAccount = [{
+    email: "admin@gmail.com",
+    password: "1234",
+    role:"admin"
+}, {
+    email: "user@gmail.com",
+    password: "1234",
+    role:"user"
+}]
 
 export default function SignIn() {
+    const navigate = useNavigate();
+    const [account, setAccount] = useState({})
+    const [isLogin, setIsLogin] = useState(false)
+    const [message,setMessage] = useState("")
     const formLogin = useFormik({
         initialValues: {
             email: "",
             password: "",
+            role:""
         },
         validationSchema: LoginSchema,
         onSubmit: values => {
-            console.log(values)
-        },
+            setAccount(values)
+            let checkAccount = listAccount.find(item=> item.email === account.email && item.password === account.password)
+            console.log(checkAccount)
+            if(checkAccount){
+                setIsLogin(true)
+                if(checkAccount.role === "admin"){
+                    navigate('/admin')
+                }
+                else if(checkAccount.role === "user") {
+                    navigate('/')
+                }
+            }else {
+                setIsLogin(false)
+                setMessage("Tài khoản mật khẩu không đúng")
+            }
+        }
     })
 
     return (
@@ -62,6 +92,9 @@ export default function SignIn() {
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Sign in
+                    </Typography>
+                    <Typography>
+                        {message}
                     </Typography>
                     <Box component="form" onSubmit={formLogin.handleSubmit} noValidate sx={{mt: 1}}>
                         <TextField

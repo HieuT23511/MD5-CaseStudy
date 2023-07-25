@@ -38,6 +38,7 @@ const SignupSchema = Yup.object().shape({
     password: Yup.string()
         .required('Required'),
 });
+const listUser = [];
 
 export default function Register() {
     const formRegister = useFormik({
