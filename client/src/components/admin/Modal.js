@@ -1,6 +1,46 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import storage from "../../firebase/firebase";
+const Modal = ({ isOpen, onClose, select }) => {
 
-const Modal = ({ isOpen, onClose, submitForm, select }) => {
+    const [file, setFile] = useState("");
+    const [percent, setPercent] = useState(0);
+
+    const  handleChange = (event) =>{
+        setFile(event.target.files[0]);
+    }
+
+    const handleUpload = (e) => {
+        e.preventDefault();
+        if (!file) {
+            alert("Please upload an image first!");
+        }
+
+        const storageRef = ref(storage, `/files/${file.name}`);
+
+        // progress can be paused and resumed. It also exposes progress updates.
+        // Receives the storage reference and the file to upload.
+        const uploadTask = uploadBytesResumable(storageRef, file);
+
+        uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+                const percent = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+
+                // update progress
+                setPercent(percent);
+            },
+            (err) => console.log(err),
+            () => {
+                // download url
+                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                    console.log(url);
+                });
+            }
+        );
+    };
 
 
     if (!isOpen) return null;
@@ -49,11 +89,12 @@ const Modal = ({ isOpen, onClose, submitForm, select }) => {
                                 </div>
                                 <div className='text-left mt-2'>
                                     <label for="image" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ảnh</label>
-                                    <input type="file" name="image" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Nhập URL Ảnh" required />
+                                    <input type="file" name="image" id="image" onChange={handleChange} accept="/image/*" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Nhập URL Ảnh" required />
+                                    <p>{percent} "% done"</p>
                                 </div>
                             </div>
                         </div>
-                        <button onClick={submitForm} type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <button onClick={handleUpload} type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             {select === -1 ? 'Thêm' : 'Cập Nhật'}
                         </button>
                     </form>
