@@ -6,6 +6,7 @@ export interface IUser extends Document {
     role: string;
     avatar: string;
     phoneNumber: string;
+    cart: object;
     google: {
         id: {
             type: string,
@@ -24,6 +25,7 @@ const userSchema: Schema = new  Schema<IUser>({
         type: String,
         default: 'no-avatar.png'
     },
+    cart: {type: Schema.Types.ObjectId, ref: "Cart"},
     google: {
         id: {
             type: String
