@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import { productDemo } from "../products/Products";
 import { Link } from "react-router-dom";
 import Modal from "./Modal";
+import axios from "axios";
 
 
 
 export default function Table() {
-    const [products, setProducts] = useState(productDemo);
+    const [products, setProducts] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [indexSelect, setIndexSelect] = useState(-1);
     useEffect(() => {
-
+        axios.get('http://localhost:8000/api/product/list').then((res) => {
+            console.log(res);
+            setProducts([...res.data.productList])
+        })
     }, []);
 
     const handleAdd = () => {
