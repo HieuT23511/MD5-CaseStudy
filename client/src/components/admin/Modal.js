@@ -101,7 +101,6 @@ const Modal = ({ isOpen, onClose, select }) => {
                 </div>
             </div>
         </>
-
     );
 };
 

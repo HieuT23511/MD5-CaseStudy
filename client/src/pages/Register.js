@@ -10,33 +10,49 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import * as Yup from 'yup';
+import {useFormik} from "formik";
 
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
-                Your Website
-            </Link>{' '}
+            {'FE2DIE-'}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
     );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
+const SignupSchema = Yup.object().shape({
+    firstName: Yup.string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
+    lastName: Yup.string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
+    email: Yup.string().email('Invalid email').required('Required'),
+    password: Yup.string()
+        .required('Required'),
+});
+const listUser = [];
 
 export default function Register() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
+    const formRegister = useFormik({
+        initialValues: {
+            firstName: "",
+            lastName: "",
+            email:"",
+            password:"",
+        },
+        validationSchema: SignupSchema,
+        onSubmit: values => {
+            console.log(values)
+        },
+    })
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -56,7 +72,7 @@ export default function Register() {
                     <Typography component="h1" variant="h5">
                         Register
                     </Typography>
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                    <Box component="form" noValidate onSubmit={formRegister.handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
@@ -67,6 +83,10 @@ export default function Register() {
                                     id="firstName"
                                     label="First Name"
                                     autoFocus
+                                    onChange={formRegister.handleChange}
+                                    value={formRegister.values.firstName}
+                                    error={formRegister.errors.firstName && formRegister.touched.firstName}
+                                    helperText={formRegister.errors.firstName && formRegister.touched.firstName ? formRegister.errors.firstName : null}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -77,6 +97,10 @@ export default function Register() {
                                     label="Last Name"
                                     name="lastName"
                                     autoComplete="family-name"
+                                    onChange={formRegister.handleChange}
+                                    value={formRegister.values.lastName}
+                                    error={formRegister.errors.lastName && formRegister.touched.lastName}
+                                    helperText={formRegister.errors.lastName && formRegister.touched.lastName ? formRegister.errors.lastName : null}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -87,6 +111,10 @@ export default function Register() {
                                     label="Email Address"
                                     name="email"
                                     autoComplete="email"
+                                    onChange={formRegister.handleChange}
+                                    value={formRegister.values.email}
+                                    error={formRegister.errors.email && formRegister.touched.email}
+                                    helperText={formRegister.errors.email && formRegister.touched.email ? formRegister.errors.email : null}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -98,6 +126,10 @@ export default function Register() {
                                     type="password"
                                     id="password"
                                     autoComplete="new-password"
+                                    onChange={formRegister.handleChange}
+                                    value={formRegister.values.password}
+                                    error={formRegister.errors.password && formRegister.touched.password}
+                                    helperText={formRegister.errors.password && formRegister.touched.password ? formRegister.errors.password : null}
                                 />
                             </Grid>
                         </Grid>
