@@ -3,9 +3,23 @@ import Product from "../models/schemas/product.schema";
 
 export class productController {
 
-    static async getProductList(req: any, res: any) {
+    static async getTypeProduct(req: any, res:any) {
         try {
             const productsType =  await ProductType.find();
+            if (productsType) {
+                res.status(200).json({
+                    message: "Success!",
+                    productType: productsType
+                });
+            }
+        } catch (err) {
+            res.status(500).json({
+                message: err.message
+            });
+        }
+    }
+    static async getProductList(req: any, res: any) {
+        try {
             const productList = await Product.find().populate('productType');
             if (productList) {
                 res.status(200).json({

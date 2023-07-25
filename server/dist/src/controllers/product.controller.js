@@ -7,9 +7,24 @@ exports.productController = void 0;
 const productType_schema_1 = __importDefault(require("../models/schemas/productType.schema"));
 const product_schema_1 = __importDefault(require("../models/schemas/product.schema"));
 class productController {
-    static async getProductList(req, res) {
+    static async getTypeProduct(req, res) {
         try {
             const productsType = await productType_schema_1.default.find();
+            if (productsType) {
+                res.status(200).json({
+                    message: "Success!",
+                    productType: productsType
+                });
+            }
+        }
+        catch (err) {
+            res.status(500).json({
+                message: err.message
+            });
+        }
+    }
+    static async getProductList(req, res) {
+        try {
             const productList = await product_schema_1.default.find().populate('productType');
             if (productList) {
                 res.status(200).json({
