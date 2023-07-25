@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const product_controller_1 = require("../controllers/product.controller");
 const productRouter = express_1.default.Router();
 productRouter.get('/list', product_controller_1.productController.getProductList);
+productRouter.get('/types', product_controller_1.productController.getTypeProduct);
 productRouter.get('/detail/:id', product_controller_1.productController.getProductDetail);
 productRouter.post('/add', product_controller_1.productController.addProduct);
 productRouter.put('/update/:id', product_controller_1.productController.updateProduct);

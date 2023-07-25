@@ -7,8 +7,7 @@ export function Products() {
     useEffect(() => {
         axios.get('http://localhost:8000/api/product/list').then((res) => {
             let productList = res.data.productList
-            console.log(productList);
-            setProducts([...res.data.productList])
+            setProducts([...productList])
         })
     }, [])
     return (
