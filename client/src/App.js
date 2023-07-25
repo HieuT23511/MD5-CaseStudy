@@ -8,8 +8,11 @@ import { ProductDetail } from './pages/products/ProductDetail';
 import About from "./pages/home/About";
 import Contact from "./pages/home/Contact";
 import ListProduct from './pages/products/ListProduct';
-import {CartItem} from "./components/CartItem";
+import { CartItem } from "./components/CartItem";
 import {Cart} from "./pages/cart/cart";
+import AdminHome from './pages/admin/AdminHome';
+import Table from './components/admin/Table';
+import Modal from './components/admin/Modal';
 
 function App() {
     return (
@@ -18,12 +21,16 @@ function App() {
                 <Route path={'/login'} element={<SignIn />} />
                 <Route path={'/register'} element={<Register />} />
                 <Route path={'/'} element={<Home />}>
-                    <Route path={'/'} element={<ListProduct/>}></Route>
+                    <Route path={'/'} element={<ListProduct />}></Route>
                     <Route path={'/products/:id'} element={<ProductDetail />}></Route>
                     <Route path={'/add-product'} element={<AddProduct />}></Route>
                     <Route path={'/about'} element={<About />}></Route>
                     <Route path={'/contact'} element={<Contact />}></Route>
                     <Route path={'/cart'} element={<Cart />}></Route>
+                </Route>
+                <Route path='/admin' element={<AdminHome />}>
+                    <Route path={'/admin/products'} element={<Table />}></Route>
+                    <Route path={'/admin/modal'} element={<Modal />}></Route>
                 </Route>
             </Routes>
         </>
